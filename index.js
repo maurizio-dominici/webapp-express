@@ -2,6 +2,7 @@
 require("dotenv").config();
 express = require("express");
 app = express();
+const movieRouter = require("./routers/movieRouters");
 const { notFound, errorHandler } = require("./middlewares/error");
 
 // CONFIG
@@ -13,15 +14,7 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // ROUTES
-const connection = require("./data/db");
-
-app.get("/", (req, res) => {
-  connection.query("SELECT * FROM movies", (err, results) => {
-    res.json({
-      movie: results,
-    });
-  });
-});
+app.use("/movies", movieRouter);
 
 // ERRORHANDLER MIDDLEWARES
 app.use(notFound);
