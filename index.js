@@ -13,10 +13,14 @@ app.use(express.static("public"));
 app.use(express.json());
 
 // ROUTES
-app.get("/", (req, res) => {
-  console.log(abc);
+const connection = require("./data/db");
 
-  res.json("Benvenuto");
+app.get("/", (req, res) => {
+  connection.query("SELECT * FROM movies", (err, results) => {
+    res.json({
+      movie: results,
+    });
+  });
 });
 
 // ERRORHANDLER MIDDLEWARES
