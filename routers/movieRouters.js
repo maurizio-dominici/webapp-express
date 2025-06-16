@@ -1,14 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const { index, show } = require("../controllers/movieController");
 
-const connection = require("../data/db");
-
-router.get("", (req, res) => {
-  connection.query("SELECT * FROM movies", (err, results) => {
-    res.json({
-      movie: results,
-    });
-  });
-});
+router.get("", index);
+router.get("/:id", show);
 
 module.exports = router;
