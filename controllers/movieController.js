@@ -28,7 +28,13 @@ const show = (req, res) => {
         message: "movie not found",
       });
 
-    const movie = results[0];
+    const result = results[0];
+
+    const movie = {
+      ...result,
+      image: `http://localhost:3000/images/${movies.image}`,
+    };
+
     const reviewsSql = "SELECT * FROM reviews WHERE movie_id = ?";
 
     connection.query(reviewsSql, [id], (err, results) => {
