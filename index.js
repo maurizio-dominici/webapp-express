@@ -21,10 +21,8 @@ app.use(
 app.use(express.static("public"));
 app.use(express.json());
 
-//localhost:3000/images/matrix.jpg
-
 // ROUTES
-http: app.use("/movies", movieRouter);
+app.use("/movies", movieRouter);
 
 // ERRORHANDLER MIDDLEWARES
 app.use(notFound);
